@@ -1,0 +1,10 @@
+#parent-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+#main-container {
+  width: 100%;
+  flex: 1;
+}
