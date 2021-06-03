@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import InputField from "./InputField";
 import FilledButton from "./FilledButton";
 import Result from "./Result";
@@ -8,7 +8,8 @@ import "../styles/Form.css";
 const Form : React.FC = () => {
   const [inputList, setInputList] = useState([{ rem: '', mod: '' }, { rem: '', mod: '' }]);
   const [solve, setSolve] = useState<boolean>(false);
-  const [solution, setSolution] = useState<number | undefined>();
+  const [solution, setSolution] = useState<string | undefined>();
+  const {REACT_APP_BACKEND} = process.env;
 
   const handleInputChange = (e: React.FormEvent<HTMLInputElement> , index: number) => {
     const { name, value } = e.currentTarget;
@@ -35,9 +36,8 @@ const Form : React.FC = () => {
 
   const handleSubmit = (e : React.FormEvent<EventTarget>) => {
     e.preventDefault();
-    console.log(inputList);
-    axios.post("http://localhost:8080/", inputList)
-    .then((response) => {
+    axios.post(`${REACT_APP_BACKEND}/solve`, inputList)
+    .then((response : AxiosResponse<string>) => {
       setSolution(response.data);
       setSolve(true);
     });

@@ -1,7 +1,7 @@
 import "../styles/Result.css";
 
 interface Props {
-  solution : number | undefined
+  solution : string | undefined
 }
 const Result : React.FC<Props> = ({solution}) => {
   return (
