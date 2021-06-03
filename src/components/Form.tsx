@@ -10,7 +10,7 @@ const Form : React.FC = () => {
 
   const handleInputChange = (e: React.FormEvent<HTMLInputElement> , index: number) => {
     const { name, value } = e.currentTarget;
-    let list = [...inputList];
+    const list = [...inputList];
     if (name === "mod") {
       list[index].mod = value;
     } else {
@@ -34,7 +34,6 @@ const Form : React.FC = () => {
   const handleSubmit = (e : React.FormEvent<EventTarget>) => {
     e.preventDefault();
     setSolve(true);
-    console.log(inputList);
   }
 
   return (
