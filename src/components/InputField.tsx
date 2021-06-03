@@ -1,27 +1,33 @@
 import "../styles/InputField.css";
 interface Props {
-  a : string;
-  m : string;
+  rem : string;
+  mod : string;
   index : number;
   setValue : (e : React.FormEvent<HTMLInputElement>, value : number) => void
 }
 
-const InputField : React.FC<Props> = ({a, m, index, setValue}) => {
+const InputField : React.FC<Props> = ({rem, mod, index, setValue}) => {
   return (
     <div className="input-field">
       <p>X ≡ </p>
       <input
-        name="a"
-        placeholder="a"
-        value={a}
+        type="text"
+        name="rem"
+        placeholder="rem"
+        value={rem}
         onChange={(e) => setValue(e, index)}
+        pattern="[0-9]+"
+        required
       />
       <p>( mod </p>
       <input
-        name="m"
-        placeholder="m"
-        value={m}
+        type="text"
+        name="mod"
+        placeholder="mod"
+        value={mod}
         onChange={(e) => setValue(e, index)}
+        pattern="[0-9]+"
+        required
       />
       <p> )</p>
     </div>

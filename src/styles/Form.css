@@ -1,7 +1,17 @@
-.box {
+#form-list {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.box {
+  margin: 1rem 0;
 }
 
 .btn-box {
-  margin: 0 1rem;
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  margin: 1rem;
 }
+

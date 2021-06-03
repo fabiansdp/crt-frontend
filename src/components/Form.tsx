@@ -1,50 +1,86 @@
 import { useState } from "react";
 import InputField from "./InputField";
+import FilledButton from "./FilledButton";
+import Result from "./Result";
 import "../styles/Form.css";
 
 const Form : React.FC = () => {
-  const [inputList, setInputList] = useState([{ a: "", m: "" }]);
+  const [inputList, setInputList] = useState([{ rem: '', mod: '' }, { rem: '', mod: '' }]);
+  const [solve, setSolve] = useState<boolean>(false);
 
   const handleInputChange = (e: React.FormEvent<HTMLInputElement> , index: number) => {
     const { name, value } = e.currentTarget;
     let list = [...inputList];
-    if (name === "m") {
-      list[index].m = value;
+    if (name === "mod") {
+      list[index].mod = value;
     } else {
-      list[index].a = value;
+      list[index].rem = value;
     }
     setInputList(list);
   };
 
-  const handleRemoveClick = (index: number) => {
+  const handleRemoveClick = () => {
     const list = [...inputList];
-    list.splice(index, 1);
+    list.splice(list.length-1, 1);
+    setSolve(false);
     setInputList(list);
   };
 
   const handleAddClick = () => {
-    setInputList([...inputList, { a: "", m: "" }]);
+    setSolve(false);
+    setInputList([...inputList, { rem: "", mod: "" }]);
   };
 
+  const handleSubmit = (e : React.FormEvent<EventTarget>) => {
+    e.preventDefault();
+    setSolve(true);
+    console.log(inputList);
+  }
+
   return (
-    <div id="form-list">
-      {inputList.map((key,index) => {
-        return (
-          <div key={index} className="box">
-            <InputField 
-              a={key.a} 
-              m={key.m}
-              index={index}
-              setValue={handleInputChange}
-            />
-            <div className="btn-box">
-              {inputList.length !== 1 && <button className="mr10" onClick={() => handleRemoveClick(index)}>Remove</button>}
-              {inputList.length - 1 === index && <button onClick={handleAddClick}>Add</button>}
+    <>
+      <form id="form-list" onSubmit={handleSubmit}>
+        <div className="btn-box">
+          <FilledButton
+            name="Add Equation"
+            submit={false}
+            background="#E0AAFF"
+            width="40%"
+            color="#10002B"
+            handleClick={handleAddClick}
+          />
+          {inputList.length !== 2 && 
+          <FilledButton
+            name="Remove Equation"
+            submit={false}
+            background="#E0AAFF"
+            width="40%"
+            color="#10002B"
+            handleClick={handleRemoveClick}
+          />}
+        </div>
+        {inputList.map((key,index) => {
+          return (
+            <div key={index} className="box">
+              <InputField 
+                rem={key.rem} 
+                mod={key.mod}
+                index={index}
+                setValue={handleInputChange}
+              />
             </div>
-          </div>
-        )
-      })}
-    </div>
+          )
+        })}
+        <FilledButton
+            name="Solve"
+            submit={true}
+            background="#E0AAFF"
+            width="50%"
+            color="#10002B"
+          />
+      </form>
+      {solve && <Result solution={0} />}
+    </>
   );
 };
 
