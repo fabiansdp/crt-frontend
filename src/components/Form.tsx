@@ -40,6 +40,7 @@ const Form : React.FC = () => {
 
   const handleSubmit = (e : React.FormEvent<EventTarget>) => {
     e.preventDefault();
+    console.log(`${REACT_APP_BACKEND}/solve`);
     axios.post(`${REACT_APP_BACKEND}/solve`, inputList)
     .then((response : AxiosResponse<ResponseData>) => {
       setSolution(response.data.solution);
