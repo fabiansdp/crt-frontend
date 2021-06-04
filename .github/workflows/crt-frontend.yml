@@ -1,3 +1,5 @@
+name: CRT Frontend
+
 on:
   push:
     branches:
