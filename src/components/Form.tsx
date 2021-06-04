@@ -5,10 +5,14 @@ import FilledButton from "./FilledButton";
 import Result from "./Result";
 import "../styles/Form.css";
 
+interface ResponseData {
+  solution : number;
+}
+
 const Form : React.FC = () => {
   const [inputList, setInputList] = useState([{ rem: '', mod: '' }, { rem: '', mod: '' }]);
   const [solve, setSolve] = useState<boolean>(false);
-  const [solution, setSolution] = useState<string | undefined>();
+  const [solution, setSolution] = useState<number | undefined>();
   const {REACT_APP_BACKEND} = process.env;
 
   const handleInputChange = (e: React.FormEvent<HTMLInputElement> , index: number) => {
@@ -37,8 +41,8 @@ const Form : React.FC = () => {
   const handleSubmit = (e : React.FormEvent<EventTarget>) => {
     e.preventDefault();
     axios.post(`${REACT_APP_BACKEND}/solve`, inputList)
-    .then((response : AxiosResponse<string>) => {
-      setSolution(response.data);
+    .then((response : AxiosResponse<ResponseData>) => {
+      setSolution(response.data.solution);
       setSolve(true);
     });
   }
