@@ -1,5 +1,5 @@
 # Chinese Remainder Solver
-> Chinese Remainder Solver Backend
+> Chinese Remainder Solver Frontend
 
 ## Daftar Isi
 * [Kontributor](#kontributor)
