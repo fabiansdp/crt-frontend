@@ -13,7 +13,7 @@ const InputField : React.FC<Props> = ({rem, mod, index, setValue}) => {
       <input
         type="text"
         name="rem"
-        placeholder="rem"
+        placeholder="a"
         value={rem}
         onChange={(e) => setValue(e, index)}
         pattern="[0-9]+"
@@ -23,7 +23,7 @@ const InputField : React.FC<Props> = ({rem, mod, index, setValue}) => {
       <input
         type="text"
         name="mod"
-        placeholder="mod"
+        placeholder="m"
         value={mod}
         onChange={(e) => setValue(e, index)}
         pattern="[0-9]+"
